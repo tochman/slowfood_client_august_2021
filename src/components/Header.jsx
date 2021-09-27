@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Icon, Button, Menu } from "semantic-ui-react";
+import { Icon, Menu } from "semantic-ui-react";
 import { NavLink, Link } from "react-router-dom";
 
 const Header = () => {
@@ -23,7 +23,6 @@ const Header = () => {
         name="menu"
         as={NavLink}
         to={{ pathname: "/Menu" }}
-        data-cy="menu"
         active={activeItem === "menu"}
         onClick={setActiveItem}
         data-cy="menu"
@@ -35,7 +34,6 @@ const Header = () => {
         name="about"
         as={NavLink}
         to={{ pathname: "/About" }}
-        data-cy="about"
         active={activeItem === "about"}
         onClick={setActiveItem}
         data-cy="about"
