@@ -1,11 +1,14 @@
 import React from 'react';
-import
-
+import {Switch, Route, BrowserRouter} from "react-router-dom";
+import Welcome from "./components/WelcomePage"
+ 
 const App = () => {
   return (
-    <>
-      <h1 data-cy="resturant-name">To Gross For Comfort</h1>
-    </>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Welcome}></Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
