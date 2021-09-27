@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Icon, Button, Menu } from "semantic-ui-react";
+import { Icon, Button, Menu } from "semantic-ui-react";
 
 const Header = () => {
   return (
