@@ -42,10 +42,8 @@ const Header = () => {
       >
         About
       </Menu.Item>
-      <Menu.Item position="right">
-        <Button size="tiny" data-cy="btn-login">
-          Log in
-        </Button>
+      <Menu.Item as="a" data-cy="btn-login" position="right">
+        Log in
       </Menu.Item>
       <Menu.Item
         id="cart"
