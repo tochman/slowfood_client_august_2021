@@ -1,9 +1,10 @@
 import React from 'react';
+import
 
 const App = () => {
   return (
     <>
-      <h1>Slowfood</h1>
+      <h1 data-cy="resturant-name">To Gross For Comfort</h1>
     </>
   );
 }
