@@ -33,10 +33,10 @@ describe("User can browser through the app", () => {
   });
   it('is expected to display a menu page', () => {
     cy.get("[data-cy=menu]").click()
-    cy.get("[data.cy=menu-section]").should("be.visible")
+    cy.get("[data-cy=menu-section]").should("be.visible")
   });
   it('is expected to display a about page', () => {
     cy.get("[data-cy=about]").click()
-    cy.get("[data.cy=about-section]").should("be.visible")
+    cy.get("[data-cy=about-section]").should("be.visible")
   });
 });
