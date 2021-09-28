@@ -1,7 +1,7 @@
 export default {
   mainmenu: [
     {
-      id: 1,
+      id: 1, 
       dish: "Kangaroo Steak",
       description: "Bouncy bouncy",
       price: "500 kr",
@@ -15,7 +15,6 @@ export default {
       url: "https://picsum.photos/200",
     },
   ],
-
   appetizers: [
     {
       id: 1,
@@ -32,8 +31,7 @@ export default {
       url: "https://picsum.photos/200",
     },
   ],
-
-  desserts: [
+  desert: [
     {
       id: 1,
       dish: "Durian",

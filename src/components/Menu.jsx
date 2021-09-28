@@ -1,22 +1,39 @@
 import React from "react";
 import data from "../data/menuItems";
-import { List } from "semantic-ui-react";
+import { Container, List, Icon } from "semantic-ui-react";
 
 const Menu = () => {
+  let menuList = data.mainmenu.map((mainmenu) => {
+    return (
+      <div id={mainmenu.id}>
+        Dish: {mainmenu.dish}
+        Desciption: {mainmenu.description}
+        Price: {mainmenu.price}
+        <Icon name="cart" link></Icon>
+      </div>
+    );
+  });
+
+  let desertList = data.desert.map((desert) => {
+    return (
+      <div id={desert.id}>
+        Dish: {desert.dish}
+        Desciption: {desert.description}
+        Price: {desert.price}
+        <Icon name="cart" link></Icon>
+      </div>
+    );
+  });
+
   return (
-    <List data-cy="menu-section">
-      <List.Header data-cy="main-menu">Main Menu</List.Header>
-      {data.mainmenu.map((mainmenu, index) => (
-        <List.Item data-cy="item-1"
-          key={index}
-          header={mainmenu.dish}
-          description={mainmenu.description}
-          value={mainmenu.price}
-          image={mainmenu.url}
-        >
-        </List.Item>
-      ))}
-    </List>
+    <Container>
+      <List data-cy="menu-section">
+        <List.Header data-cy="main-menu-header" >Main Menu</List.Header>
+        <List.Item data-cy="main-menu">{menuList}</List.Item>
+        <List.Header data-cy="dessert-menu">Deserts</List.Header>
+        {desertList}
+      </List>
+    </Container>
   );
 };
 
