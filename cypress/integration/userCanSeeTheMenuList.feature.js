@@ -10,10 +10,10 @@ describe("User can see menu", () => {
 
   it("is expected to show the first item on the menu", () => {
     cy.get("[data-cy=item-1").within(() => {
-      cy.get("[data-cy=dish]").should("contain", "Kangaroo Steak");
-      cy.get("[data-cy=description]").should("contain", "Bouncy bouncy");
-      cy.get("[data-cy=price]").should("contain", "500 kr");
-      cy.get("[data-cy=image]").find("img").should("be.visible");
+      cy.get(".header").should("contain", "Kangaroo Steak");
+      cy.get(".description").should("contain", "Bouncy bouncy");
+      cy.get(".value").should("contain", "500 kr");
+      cy.get(".image").find("img").should("be.visible");
       cy.get("[data-cy=add-to-basket]").should("be.visible");
     });
   });
