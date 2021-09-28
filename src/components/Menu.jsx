@@ -1,22 +1,30 @@
-import React from "react";
-import data from "../data/menuItems";
-import { Container, List, Icon } from "semantic-ui-react";
+import React, { useState, useEffect } from "react";
+import { Segment, Icon } from "semantic-ui-react";
+import MenuItems from "./MenuItems";
+import axios from "axios";
 
 const Menu = () => {
-  let starterList = data.starters.map((starters) => {
+  const [starters, setStarters] = useState([]);
+  const [menuLists, setMenuList] = useState([]);
+  const [dessertLists, setDessertList] = useState([]);
+  useEffect(() => {
+    axios.get("./data/MenuItems.json").then((response) => {
+      setStarters(response.data)
+      setMenuList(response.data)
+      setDessertList(response.data);
+    });
+  });
+
+  let starterList = starters.map((starter) => {
     return (
       <div>
-        <div data-cy="starter-list" id={starters.id}>
-          {starters.dish}
-          {starters.description}
-          {starters.price}
-          kr
-        <Icon name="cart" link></Icon>
+        <div data-cy="starter-list" id={`ballon-${starters.id}`}>
+          <MenuItems starter={starter} />
         </div>
       </div>
     );
   });
-  let menuList = data.main_menu.map((main_menu) => {
+  let menuList = menuLists.map((main_menu) => {
     return (
       <div id={main_menu.id}>
         {main_menu.dish}
@@ -27,7 +35,7 @@ const Menu = () => {
     );
   });
 
-  let dessertList = data.dessert.map((dessert) => {
+  let dessertList = dessertLists.map((dessert) => {
     return (
       <div id={dessert.id}>
         {dessert.dish}
@@ -39,16 +47,11 @@ const Menu = () => {
   });
 
   return (
-    <Container>
-      <List data-cy="menu-section">
-        <List.Header data-cy="starter-header">Starters</List.Header>
-        <List.Item data-cy="starter-menu">{starterList}</List.Item>
-        <List.Header data-cy="main-menu-header">Main Menu</List.Header>
-        <List.Item data-cy="main-menu">{menuList}</List.Item>
-        <List.Header data-cy="dessert-header">Desserts</List.Header>
-        <List.Item data-cy="dessert-menu">{dessertList}</List.Item>
-      </List>
-    </Container>
+    <Segment data-cy="menu-section">
+      {starterList}
+      {menuList}
+      {dessertList}
+    </Segment>
   );
 };
 
