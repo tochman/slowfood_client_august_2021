@@ -1,6 +1,6 @@
 describe("User can see menu", () => {
   beforeEach(() => {
-    cy.intercept("https://localhost:3000/api/menu", {
+    cy.intercept("**api/products", {
       fixture: "menuItems.json",
     });
     cy.visit("/");

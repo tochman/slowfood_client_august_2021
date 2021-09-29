@@ -1,16 +1,16 @@
 import React from "react";
 import { List, Image } from "semantic-ui-react";
 
-const MenuItem = ({ item }) => {
+const MenuItem = ({ items }) => {
   return (
     <List.Item>
-      <Image data-cy="image" src={item.image} size="mini" />
+      <Image data-cy="image" src={items.image} size="mini" />
       <List.Content floated="left">
-        <List.Header data-cy="name">{item.name}</List.Header>
+        <List.Header data-cy="name">{items.name}</List.Header>
         <List.Description data-cy="description">
-          {item.description}
+          {items.description}
         </List.Description>
-        <List.Item data-cy="price">{item.price} kr</List.Item>
+        <List.Item data-cy="price">{items.price} kr</List.Item>
       </List.Content>
       <List.Icon
         floated="right"
