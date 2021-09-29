@@ -14,6 +14,11 @@ const App = () => {
         <Route exact path="/" component={HomePage}></Route>
         <Route exact path="/menu" component={MenuPage}></Route>
         <Route exact path="/about" component={About}></Route>
+        <Route exact path="/starters" component={MenuPage}></Route>
+        <Route exact path="/main-menu" component={MenuPage}></Route>
+        <Route exact path="/dessert" component={MenuPage}></Route>
+        <Route exact path="/sides" component={MenuPage}></Route>
+        <Route exact path="/drinks" component={MenuPage}></Route>
       </Switch>
       <Footer />
     </BrowserRouter>
