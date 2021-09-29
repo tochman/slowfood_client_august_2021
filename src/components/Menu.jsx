@@ -4,17 +4,17 @@ import MenuItem from "./MenuItem";
 import axios from "axios";
 
 const Menu = () => {
-  const [menuItems, setIdentification] = useState([]);
+  const [menuItems, setMenuItems] = useState([]);
   useEffect(() => {
     axios.get("https://slowfood.heroku.com/api/products").then((response) => {
-      setIdentification(response.data.products);
+      setMenuItems(response.data.products);
     });
   }, []);
 
-  let menuList = menuItems.map((items) => {
+  let menuList = menuItems.map((item) => {
     return (
-      <List data-cy={`item-${items.id}`}>
-        <MenuItem items={items} />
+      <List data-cy={`item-${item.id}`}>
+        <MenuItem item={item} />
       </List>
     );
   });
