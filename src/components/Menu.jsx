@@ -5,21 +5,32 @@ import axios from "axios";
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
-  const [activeItem, setActiveItem] = useState();
+  const [activeTab, setActiveTab] = useState();
   useEffect(() => {
     axios.get("https://slowfood.heroku.com/api/products").then((response) => {
       setMenuItems(response.data.products);
+      setActiveTab()
     });
   }, []);
 
-  let menuList = menuItems.map((item) => {
+  const filteredCategory = menuItems.filter(
+    (item) => item.category === activeTab
+  );
+
+  let menuList = filteredCategory.map((item) => {
     return (
-      <List data-cy={`item-${item.id}`}>
-        <MenuItem item={item} />
+      <List key={item.id} data-cy={`item-${item.id}`}>
+        <List.Content
+          data-cy={`${activeTab.slice(0, -1)}-${filteredCategory.indexOf(
+            item
+          )}`}
+        >
+          <MenuItem item={item} />
+        </List.Content>
       </List>
     );
   });
-
+const tab = {tab: ""}
   return (
     <div>
       <Grid>
@@ -28,40 +39,40 @@ const MenuPage = () => {
             <Menu.Item
               name="Starters"
               data-cy="starter-tab"
-              active={activeItem === "starters"}
-              onClick={setActiveItem}
+              active={activeTab === "starters"}
+              onClick={setActiveTab}
             />
             <Menu.Item
               name="Main Menu"
               data-cy="main-menu-tab"
-              active={activeItem === "main-menu"}
-              onClick={setActiveItem}
+              active={activeTab === "main-menu"}
+              onClick={setActiveTab}
             />
             <Menu.Item
               name="Desserts"
               data-cy="dessert-tab"
-              active={activeItem === "desserts"}
-              onClick={setActiveItem}
+              active={activeTab === "desserts"}
+              onClick={setActiveTab}
             />
             <Menu.Item
               name="Sides"
               data-cy="sides-tab"
-              active={activeItem === "sides"}
-              onClick={setActiveItem}
+              active={activeTab === "sides"}
+              onClick={setActiveTab}
             />
             <Menu.Item
               name="Drinks"
               data-cy="drinks-tab"
-              active={activeItem === "drinks"}
-              onClick={setActiveItem}
+              active={activeTab === "drinks"}
+              onClick={setActiveTab}
             />
           </Menu>
         </Grid.Column>
-        <Grid.Column>
-        </Grid.Column>
-      <Segment.Inline data-cy="menu-section" clearing>
-        {menuList}
-      </Segment.Inline>
+        <Grid.Column></Grid.Column>
+        <Segment.Inline data-cy="menu-section" clearing>
+          {menuList}
+          {filteredCategory}
+        </Segment.Inline>
       </Grid>
     </div>
   );
