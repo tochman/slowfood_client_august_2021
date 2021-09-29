@@ -5,32 +5,39 @@ import axios from "axios";
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
-  const [activeTab, setActiveTab] = useState();
+  const [activeTab, setActiveTab] = useState("starters");
   useEffect(() => {
     axios.get("https://slowfood.heroku.com/api/products").then((response) => {
       setMenuItems(response.data.products);
-      setActiveTab()
+      setActiveTab();
     });
   }, []);
 
-  const filteredCategory = menuItems.filter(
-    (item) => item.category === activeTab
-  );
+  const filteredCategory = menuItems.filter(item => item.category === "main menu");
+
+  // let menuList = filteredCategory.map((item) => {
+  //   return (
+  //     <List key={item.id} data-cy={`item-${item.id}`}>
+  //       <List.Content
+  //         data-cy={`${activeTab.slice(0, -1)}-${filteredCategory.indexOf(
+  //           item.id
+  //         )}`}
+  //       >
+  //         <MenuItem item={item} />
+  //       </List.Content>
+  //     </List>
+  //   );
+  // });
 
   let menuList = filteredCategory.map((item) => {
     return (
-      <List key={item.id} data-cy={`item-${item.id}`}>
-        <List.Content
-          data-cy={`${activeTab.slice(0, -1)}-${filteredCategory.indexOf(
-            item
-          )}`}
-        >
-          <MenuItem item={item} />
-        </List.Content>
+      <List data-cy={`item-${item.id}`}>
+        <MenuItem item={item} />
       </List>
     );
   });
-const tab = {tab: ""}
+
+  // const tab = { tab: "" };
   return (
     <div>
       <Grid>
@@ -71,7 +78,7 @@ const tab = {tab: ""}
         <Grid.Column></Grid.Column>
         <Segment.Inline data-cy="menu-section" clearing>
           {menuList}
-          {filteredCategory}
+          {/* {filteredCategory} */}
         </Segment.Inline>
       </Grid>
     </div>
