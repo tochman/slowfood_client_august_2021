@@ -16,7 +16,7 @@
     "url": "https://picsum.photos/200"
   },
   {
-    "id": 1,
+    "id": 3,
     "category": "main menu",
     "dish": "Kangaroo Steak",
     "description": "Bouncy bouncy",
@@ -24,7 +24,7 @@
     "url": "https://picsum.photos/200"
   },
   {
-    "id": 2,
+    "id": 4,
     "category": "main menu",
     "dish": "Hedgehog Ragu´",
     "description": "Tons of spikes",
@@ -32,7 +32,7 @@
     "url": "https://picsum.photos/200"
   },
   {
-    "id": 1,
+    "id": 5,
     "category": "dessert",
     "dish": "Durian",
     "description": "Smelly Smelly",
@@ -40,7 +40,7 @@
     "url": "https://picsum.photos/200"
   },
   {
-    "id": 2,
+    "id": 6,
     "category": "dessert",
     "dish": "Feet Shavings",
     "description": "Smelly Belly",
