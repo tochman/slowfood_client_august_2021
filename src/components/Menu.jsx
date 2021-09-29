@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { Segment, List } from "semantic-ui-react";
+import MenuItem from "./MenuItem";
+import axios from "axios";
 
 const Menu = () => {
-  return (
-    <div data-cy="menu-section">
-      <h1 data-cy="main-menu">Main Menu</h1>
-    </div>
-  )
-}
+  const [menuItems, setMenuItems] = useState([]);
+  useEffect(() => {
+    axios.get("https://slowfood.heroku.com/api/products").then((response) => {
+      setMenuItems(response.data.products);
+    });
+  }, []);
 
-export default Menu
+  let menuList = menuItems.map((item) => {
+    return (
+      <List data-cy={`item-${item.id}`}>
+        <MenuItem item={item} />
+      </List>
+    );
+  });
+
+  return (
+    <Segment.Inline data-cy="menu-section" clearing>
+      {menuList}
+    </Segment.Inline>
+  );
+};
+
+export default Menu;
