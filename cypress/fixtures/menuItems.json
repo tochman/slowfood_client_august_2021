@@ -47,6 +47,22 @@
       "description": "Smelly Belly",
       "price": 100,
       "image": "https://picsum.photos/200"
-    }
+    },
+    {
+    "id": 7,
+      "category": "side",
+      "name": "Bread",
+      "description": "Bread",
+      "price": 15,
+      "image": "https://picsum.photos/200"
+    },
+    {
+      "id": 7,
+        "category": "drink",
+        "name": "Mouse Wine",
+        "description": "Squeek!",
+        "price": 35,
+        "image": "https://picsum.photos/200"
+      }
   ]
 }

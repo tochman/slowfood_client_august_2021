@@ -57,10 +57,12 @@ const MenuPage = () => {
             />
           </Menu>
         </Grid.Column>
-      </Grid>
+        <Grid.Column>
+        </Grid.Column>
       <Segment.Inline data-cy="menu-section" clearing>
         {menuList}
       </Segment.Inline>
+      </Grid>
     </div>
   );
 };
