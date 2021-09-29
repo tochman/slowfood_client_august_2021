@@ -2,49 +2,49 @@
   {
     "id": 1,
     "category": "starters",
-    "dish": "Insects",
+    "name": "Insects",
     "description": "Creepy Crawlies",
     "price": 250,
-    "url": "https://picsum.photos/200"
+    "image": "https://picsum.photos/200"
   },
   {
     "id": 2,
     "category": "starters",
-    "dish": "Fecies Lava Mountain",
+    "name": "Fecies Lava Mountain",
     "description": "Spjuve oh'mighty",
     "price": 250,
-    "url": "https://picsum.photos/200"
+    "image": "https://picsum.photos/200"
   },
   {
     "id": 3,
     "category": "main menu",
-    "dish": "Kangaroo Steak",
+    "name": "Kangaroo Steak",
     "description": "Bouncy bouncy",
     "price": 500,
-    "url": "https://picsum.photos/200"
+    "image": "https://picsum.photos/200"
   },
   {
     "id": 4,
     "category": "main menu",
-    "dish": "Hedgehog Ragu´",
+    "name": "Hedgehog Ragu´",
     "description": "Tons of spikes",
     "price": 500,
-    "url": "https://picsum.photos/200"
+    "image": "https://picsum.photos/200"
   },
   {
     "id": 5,
     "category": "dessert",
-    "dish": "Durian",
+    "name": "Durian",
     "description": "Smelly Smelly",
     "price": 100,
-    "url": "https://picsum.photos/200"
+    "image": "https://picsum.photos/200"
   },
   {
     "id": 6,
     "category": "dessert",
-    "dish": "Feet Shavings",
+    "name": "Feet Shavings",
     "description": "Smelly Belly",
     "price": 100,
-    "url": "https://picsum.photos/200"
+    "image": "https://picsum.photos/200"
   }
 ]
