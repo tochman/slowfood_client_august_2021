@@ -4,7 +4,7 @@ import { List, Image } from "semantic-ui-react";
 const MenuItem = ({ item }) => {
   return (
     <List.Item data-cy={`item-${item.id}`}>
-      <Image data-cy="image" src={item.image} size="mini" />
+      <Image data-cy="image" src={item.image} size="mini" floated="right"/>
       <List.Content floated="left">
         <List.Header data-cy="name">{item.name}</List.Header>
         <List.Description data-cy="description">

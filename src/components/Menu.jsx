@@ -5,7 +5,9 @@ import axios from "axios";
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
+  const [activeItem, setActiveItem] = useState();
   const [activeCategory, setActiveCategory] = useState("starters");
+
   useEffect(() => {
     axios.get("https://slowfood.heroku.com/api/products").then((response) => {
       setMenuItems(response.data.products);
@@ -17,17 +19,12 @@ const MenuPage = () => {
     });
   }, [activeCategory]);
 
-  const filteredCategory = menuItems.filter((item) => item.category === activeCategory);
-  
+  const filteredCategory = menuItems.filter(
+    (item) => item.category === activeCategory
+  );
 
   let menuList = filteredCategory.map((item) => {
-    return (
-      <MenuItem
-        key={item.id}
-        item={item}
-        
-      ></MenuItem>
-    );
+    return <MenuItem key={item.id} item={item}></MenuItem>;
   });
 
   return (
@@ -38,32 +35,32 @@ const MenuPage = () => {
             <Menu.Item
               name="Starters"
               data-cy="starter-tab"
-              active={activeCategory === "starters"}
-              onClick={() => setActiveCategory()}
+              active={activeItem === "starters"}
+              onClick={() => setActiveCategory("starters")}
             />
             <Menu.Item
               name="Main Menu"
-              data-cy="main-menu-tab"
-              active={activeCategory == "main-menu"}
-              onClick={() => setActiveCategory()}
+              data-cy="main-courses-tab"
+              active={activeCategory === "main-menu"}
+              onClick={() => setActiveCategory("main_courses")}
             />
             <Menu.Item
               name="Desserts"
-              data-cy="dessert-tab"
-              // active={activeCategory === "desserts"}
-              onClick={() => setActiveCategory()}
+              data-cy="desserts-tab"
+              active={activeCategory === "desserts"}
+              onClick={() => setActiveCategory("desserts")}
             />
             <Menu.Item
               name="Sides"
               data-cy="sides-tab"
               active={activeCategory === "sides"}
-              onClick={() => setActiveCategory()}
+              onClick={() => setActiveCategory("sides")}
             />
             <Menu.Item
               name="Drinks"
               data-cy="drinks-tab"
               active={activeCategory === "drinks"}
-              onClick={() => setActiveCategory()}
+              onClick={() => setActiveCategory("drinks")}
             />
           </Menu>
         </Grid.Column>
