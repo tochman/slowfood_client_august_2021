@@ -11,18 +11,13 @@ const MenuPage = () => {
     axios.get("https://slowfood.heroku.com/api/products").then((response) => {
       setMenuItems(response.data.products);
     });
-  }, []);
-  useEffect(() => {
-    axios.get("https://slowfood.heroku.com/api/products").then((response) => {
-      setMenuItems(response.data.products);
-    });
   }, [activeCategory]);
 
-  const filteredCategory = menuItems.filter(
+  const itemsInCategories = menuItems.filter(
     (item) => item.category === activeCategory
   );
 
-  let menuList = filteredCategory.map((item) => {
+  let menuList = itemsInCategories.map((item) => {
     return <MenuItem key={item.id} item={item}></MenuItem>;
   });
 
@@ -38,7 +33,7 @@ const MenuPage = () => {
               onClick={() => setActiveCategory("starters")}
             />
             <Menu.Item
-              name="Main Menu"
+              name="Main Courses"
               data-cy="main-courses-tab"
               active={activeCategory === "main-menu"}
               onClick={() => setActiveCategory("main_courses")}
