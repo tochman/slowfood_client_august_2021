@@ -5,7 +5,6 @@ import axios from "axios";
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
-  const [activeItem, setActiveItem] = useState();
   const [activeCategory, setActiveCategory] = useState("starters");
 
   useEffect(() => {
@@ -35,7 +34,7 @@ const MenuPage = () => {
             <Menu.Item
               name="Starters"
               data-cy="starter-tab"
-              active={activeItem === "starters"}
+              active={activeCategory === "starters"}
               onClick={() => setActiveCategory("starters")}
             />
             <Menu.Item
