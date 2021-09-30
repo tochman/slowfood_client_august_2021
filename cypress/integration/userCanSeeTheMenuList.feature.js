@@ -6,18 +6,16 @@ describe("User can see menu", () => {
     cy.visit("/");
     cy.get("[data-cy=menu]").click();
   });
-  it("is expected to show eight items in the menu", () => {
-    cy.get("[data-cy=menu-section]").children().should("have.length", 8);
-  });
-
+   
   describe("User can see menu-items by category", () => {
     it("is expected to display starter menu-items", () => {
       cy.get("[data-cy=starter-tab]").should("contain", "Starters");
     });
     it("is expected to display the content of starter-menu-item", () => {
       cy.get("[data-cy=starter-tab]").click();
+      cy.get("[data-cy=menu-section]").children().should("have.length", 2);
       cy.get("[data-cy=starter-menu-item-1]").within(() => {
-        cy.get("[data-cy=starter-header]").should("contain", "Starters");
+      cy.get("[data-cy=starter-header]").should("contain", "Starters");
         cy.get("[data-cy=name]").should("contain", "Insect");
         cy.get("[data-cy=description]").should("contain", "Creepy Crawlies");
         cy.get("[data-cy=price]").should("contain", "250 kr");
@@ -26,8 +24,8 @@ describe("User can see menu", () => {
       });
     });
 
-    it("is expected to display main-menu items", () => {
-      cy.get("[data-cy=main-menu-tab]").should("contain", "Main Menu");
+    it("is expected to display main_courses items", () => {
+      cy.get("[data-cy=main-menu-tab]").should("contain", "Main Courses");
     });
     it("is expected to display the content of main-menu items", () => {
       cy.get("[data-cy=main-menu-tab]").click();

@@ -1,25 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { Segment, Grid, Menu, Container, GridColumn } from "semantic-ui-react";
+import { Segment, Grid, Menu, Container } from "semantic-ui-react";
 import MenuItem from "./MenuItem";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
-  const [activeItem, setActiveItem] = useState();
+  const [activeCategory, setActiveCategory] = useState("starters");
   useEffect(() => {
     axios.get("https://slowfood.heroku.com/api/products").then((response) => {
       setMenuItems(response.data.products);
-      
     });
   }, []);
+  useEffect(() => {
+    axios.get("https://slowfood.heroku.com/api/products").then((response) => {
+      setMenuItems(response.data.products);
+    });
+  }, [activeCategory]);
 
-  const filteredCategory = menuItems.filter(
-    (item) => item.category === "starters"
-  );
+  const filteredCategory = menuItems.filter((item) => item.category === activeCategory);
+  
 
   let menuList = filteredCategory.map((item) => {
-    return <MenuItem item={item} data-cy={`item-${item.id}`}></MenuItem>;
+    return (
+      <MenuItem
+        key={item.id}
+        item={item}
+        
+      ></MenuItem>
+    );
   });
 
   return (
@@ -28,51 +36,40 @@ const MenuPage = () => {
         <Grid.Column width={4}>
           <Menu fluid vertical tabular>
             <Menu.Item
-              id="tab"
               name="Starters"
               data-cy="starter-tab"
-              active={activeItem === "starters"}
-              onClick={setActiveItem}
-              as={Link}
-              to={{ pathname: "/starters" }}
+              active={activeCategory === "starters"}
+              onClick={() => setActiveCategory()}
             />
             <Menu.Item
-              id="tab"
               name="Main Menu"
               data-cy="main-menu-tab"
-              active={activeItem === "main-menu"}
-              onClick={() => setActiveItem({ tab: "main-menu" })}
-              as={Link}
-              to={{ pathname: "/main-menu" }}
+              active={activeCategory == "main-menu"}
+              onClick={() => setActiveCategory()}
             />
             <Menu.Item
               name="Desserts"
               data-cy="dessert-tab"
-              active={activeItem === "desserts"}
-              onClick={setActiveItem}
-              as={Link}
-              to={{ pathname: "/dessert" }}
+              // active={activeCategory === "desserts"}
+              onClick={() => setActiveCategory()}
             />
             <Menu.Item
               name="Sides"
               data-cy="sides-tab"
-              active={activeItem === "sides"}
-              onClick={setActiveItem}
-              as={Link}
-              to={{ pathname: "/sides" }}
+              active={activeCategory === "sides"}
+              onClick={() => setActiveCategory()}
             />
             <Menu.Item
               name="Drinks"
               data-cy="drinks-tab"
-              active={activeItem === "drinks"}
-              onClick={setActiveItem}
-              as={Link}
-              to={{ pathname: "/drinks" }}
+              active={activeCategory === "drinks"}
+              onClick={() => setActiveCategory()}
             />
           </Menu>
         </Grid.Column>
         <Grid.Column width={12}>
-          <Segment.Inline data-cy="menu-section">{menuList}</Segment.Inline>
+          <h1>{activeCategory}</h1>
+          <Segment data-cy="menu-section">{menuList}</Segment>
         </Grid.Column>
       </Grid>
     </Container>
