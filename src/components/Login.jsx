@@ -2,26 +2,24 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Container, Modal } from "semantic-ui-react";
 
-
-
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userConfirmPassword, setUserConfirmPassword] = useState("");
-  const [open, setOpen] = useState('')
+  const [open, setOpen] = useState("");
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     axios({
-      method: 'post',
-      url: 'https://slowfood.heroku.com/api/auth/',
+      method: "post",
+      url: "https://slowfood.heroku.com/api/auth/",
       params: {
         email: userEmail,
         password: userPassword,
         password_confirmation: userConfirmPassword,
-        confirm_success_url: "placeholder"
-      }
-    })
+        confirm_success_url: "placeholder",
+      },
+    }).then(setOpen(true));
   };
 
   return (
@@ -57,7 +55,17 @@ const Login = () => {
         <input data-cy="btn-signup" type="submit" value="Submit" />
       </form>
       <button>Submit</button>
-      <Modal></Modal>
+      <Modal
+        basic
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+        open={open}
+        size="small"
+      >
+        <Modal.Content>
+          <h1 data-cy="registration-message">Registration successful</h1>
+        </Modal.Content>
+      </Modal>
     </Container>
   );
 };
