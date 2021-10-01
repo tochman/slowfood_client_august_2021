@@ -18,7 +18,7 @@
     },
     {
       "id": 3,
-      "category": "main menu",
+      "category": "main_courses",
       "name": "Kangaroo Steak",
       "description": "Bouncy bouncy",
       "price": 500,
@@ -26,7 +26,7 @@
     },
     {
       "id": 4,
-      "category": "main menu",
+      "category": "main_courses",
       "name": "Hedgehog Ragu´",
       "description": "Tons of spikes",
       "price": 500,
@@ -34,19 +34,35 @@
     },
     {
       "id": 5,
-      "category": "dessert",
+      "category": "desserts",
       "name": "Durian",
-      "description": "Smelly Smelly",
+      "description": "Smelly smelly",
       "price": 100,
       "image": "https://picsum.photos/200"
     },
     {
       "id": 6,
-      "category": "dessert",
+      "category": "desserts",
       "name": "Feet Shavings",
-      "description": "Smelly Belly",
+      "description": "Smelly selly",
       "price": 100,
       "image": "https://picsum.photos/200"
-    }
+    },
+    {
+    "id": 7,
+      "category": "sides",
+      "name": "Bread",
+      "description": "Bread",
+      "price": 15,
+      "image": "https://picsum.photos/200"
+    },
+    {
+      "id": 8,
+        "category": "drinks",
+        "name": "Mouse Wine",
+        "description": "Squeek!",
+        "price": 35,
+        "image": "https://picsum.photos/200"
+      }
   ]
 }

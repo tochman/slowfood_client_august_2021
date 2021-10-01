@@ -1,8 +1,10 @@
 describe("User can browser through the app", () => {
   beforeEach(() => {
+    cy.intercept("**api/products", {
+      fixture: "menuItems.json",
+    });
     cy.visit("/");
   });
-
   it("is expected to display the name of the resturant", () => {
     cy.get("[data-cy=resturant-name]").should(
       "contain",
@@ -31,12 +33,12 @@ describe("User can browser through the app", () => {
   it("is expected to display a footer", () => {
     cy.get("[data-cy=footer]").should("contain", "Funny quip goes here");
   });
-  it('is expected to display a menu page', () => {
-    cy.get("[data-cy=menu]").click()
-    cy.get("[data-cy=menu-section]").should("be.visible")
+  it("is expected to display a menu page", () => {
+    cy.get("[data-cy=menu]").click();
+    cy.get("[data-cy=menu-section]").should("be.visible");
   });
-  it('is expected to display a about page', () => {
-    cy.get("[data-cy=about]").click()
-    cy.get("[data-cy=about-section]").should("be.visible")
+  it("is expected to display a about page", () => {
+    cy.get("[data-cy=about]").click();
+    cy.get("[data-cy=about-section]").should("be.visible");
   });
 });

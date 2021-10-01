@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Icon, Menu } from "semantic-ui-react";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [activeItem, setActiveItem] = useState();
@@ -21,7 +21,7 @@ const Header = () => {
       <Menu.Item
         id="menu"
         name="menu"
-        as={NavLink}
+        as={Link}
         to={{ pathname: "/Menu" }}
         active={activeItem === "menu"}
         onClick={setActiveItem}
@@ -32,7 +32,7 @@ const Header = () => {
       <Menu.Item
         id="about"
         name="about"
-        as={NavLink}
+        as={Link}
         to={{ pathname: "/About" }}
         active={activeItem === "about"}
         onClick={setActiveItem}
@@ -46,7 +46,7 @@ const Header = () => {
       <Menu.Item
         id="cart"
         name="cart"
-        as={NavLink}
+        as={Link}
         to={{ pathname: "/Cart" }}
         data-cy="cart"
         active={activeItem === "cart"}
