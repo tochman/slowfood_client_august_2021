@@ -11,7 +11,7 @@ const MenuPage = () => {
     axios.get("https://slowfood.heroku.com/api/products").then((response) => {
       setMenuItems(response.data.products);
     });
-  }, [activeCategory]);
+  }, []);
 
   const itemsInCategories = menuItems.filter(
     (item) => item.category === activeCategory
