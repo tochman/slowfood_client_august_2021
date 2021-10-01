@@ -1,21 +1,63 @@
-import React from "react";
-import { Container } from "semantic-ui-react";
+import axios from "axios";
+import React, { useState } from "react";
+import { Container, Modal } from "semantic-ui-react";
+
+
 
 const Login = () => {
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userConfirmPassword, setUserConfirmPassword] = useState("");
+  const [open, setOpen] = useState('')
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    axios({
+      method: 'post',
+      url: 'https://slowfood.heroku.com/api/auth/',
+      params: {
+        email: userEmail,
+        password: userPassword,
+        password_confirmation: userConfirmPassword,
+        confirm_success_url: "placeholder"
+      }
+    })
+  };
+
   return (
     <Container>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Email:
-          <input type="text" name="name"></input>
+          <input
+            data-cy="email-input"
+            type="text"
+            value={userEmail}
+            onChange={(e) => setUserEmail(e.target.value)}
+          ></input>
         </label>
         <label>
           Password:
-          <input type="password" name="name"></input>
+          <input
+            data-cy="password-input"
+            type="password"
+            value={userPassword}
+            onChange={(e) => setUserPassword(e.target.value)}
+          ></input>
         </label>
+        <label>
+          Confirm password:
+          <input
+            data-cy="confirm-password-input"
+            type="password"
+            value={userConfirmPassword}
+            onChange={(e) => setUserConfirmPassword(e.target.value)}
+          ></input>
+        </label>
+        <input data-cy="btn-signup" type="submit" value="Submit" />
       </form>
       <button>Submit</button>
-      <button data-cy="btn-signup">Signup</button>
+      <Modal></Modal>
     </Container>
   );
 };
