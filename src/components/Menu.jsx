@@ -18,7 +18,7 @@ const MenuPage = () => {
   );
 
   let menuList = itemsInCategories.map((item) => {
-    return <MenuItem key={item.id} item={item}></MenuItem>;
+    return <MenuItem key={item.id} item={item} />
   });
 
   return (
