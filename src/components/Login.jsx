@@ -1,15 +1,15 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Container, Modal } from "semantic-ui-react";
+import axios from "axios"
+import React, { useState } from "react"
+import { Container, Modal, Form, Input, Button } from "semantic-ui-react"
 
 const Login = () => {
-  const [userEmail, setUserEmail] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-  const [userConfirmPassword, setUserConfirmPassword] = useState("");
-  const [open, setOpen] = useState("");
+  const [userEmail, setUserEmail] = useState("")
+  const [userPassword, setUserPassword] = useState("")
+  const [userConfirmPassword, setUserConfirmPassword] = useState("")
+  const [open, setOpen] = useState(false)
 
   const handleSubmit = (evt) => {
-    evt.preventDefault();
+    evt.preventDefault()
     axios({
       method: "post",
       url: "https://slowfood.heroku.com/api/auth/",
@@ -19,41 +19,46 @@ const Login = () => {
         password_confirmation: userConfirmPassword,
         confirm_success_url: "placeholder",
       },
-    }).then(setOpen(true));
-  };
+    }).then(setOpen(true))
+  }
 
   return (
     <Container>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
-            data-cy="email-input"
-            type="text"
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-          ></input>
-        </label>
-        <label>
-          Password:
-          <input
-            data-cy="password-input"
-            type="password"
-            value={userPassword}
-            onChange={(e) => setUserPassword(e.target.value)}
-          ></input>
-        </label>
-        <label>
-          Confirm password:
-          <input
-            data-cy="confirm-password-input"
-            type="password"
-            value={userConfirmPassword}
-            onChange={(e) => setUserConfirmPassword(e.target.value)}
-          ></input>
-        </label>
-        <input data-cy="btn-signup" type="submit" value="Submit" />
-      </form>
+      <Form onSubmit={handleSubmit}>
+        <Form.Field
+          data-cy="email-input"
+          control={Input}
+          label="Email"
+          id="form-input-control-error-email"
+          placeholder="example@email.com"
+          value={userEmail}
+          onChange={(e) => setUserEmail(e.target.value)}
+          error={{
+            content: "Please enter a valid email address",
+            pointing: "below",
+          }}
+        />
+        <Form.Field
+          data-cy="password-input"
+          control={Input}
+          label="Password"
+          value={userPassword}
+          onChange={(e) => setUserPassword(e.target.value)}
+        />
+        <Form.Field
+          data-cy="confirm-password-input"
+          control={Input}
+          label="Confirm Password"
+          value={userConfirmPassword}
+          onChange={(e) => setUserConfirmPassword(e.target.value)}
+        />
+        <Form.Field
+          data-cy="btn-signup"
+          id="form-button-control-public"
+          control={Button}
+          content="Submit"
+        />
+      </Form>
       <Modal
         basic
         closeIcon
@@ -67,7 +72,7 @@ const Login = () => {
         </Modal.Content>
       </Modal>
     </Container>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
