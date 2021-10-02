@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Container, Modal, Form, Input, Button } from "semantic-ui-react";
 
-const Login = () => {
+const Signup = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userConfirmPassword, setUserConfirmPassword] = useState("");
@@ -89,4 +89,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

@@ -26,8 +26,8 @@ describe("User can browser through the app", () => {
   it("is expected to display a cart icon", () => {
     cy.get("[data-cy=shopping-cart]").should("be.visible");
   });
-  it("is expected to display a login button", () => {
-    cy.get("[data-cy=btn-login]").should("be.visible");
+  it("is expected to display a signup button", () => {
+    cy.get("[data-cy=btn-signup]").should("be.visible");
   });
 
   it("is expected to display a footer", () => {

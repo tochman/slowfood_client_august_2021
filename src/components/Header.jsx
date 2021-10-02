@@ -42,14 +42,14 @@ const Header = () => {
       </Menu.Item>
       <Menu.Item 
         position="right"
-        id="login"
-        name="login"
+        id="signup"
+        name="signup"
         as={Link}
-        to={{ pathname: "/login" }}
-        data-cy="btn-login"
-        active={activeItem === "login"}
+        to={{ pathname: "/signup" }}
+        data-cy="btn-signup"
+        active={activeItem === "signup"}
         onClick={setActiveItem}>
-        Log in
+        Sign up
       </Menu.Item>
       <Menu.Item
         id="cart"

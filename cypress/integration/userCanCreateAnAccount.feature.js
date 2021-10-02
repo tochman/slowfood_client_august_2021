@@ -4,7 +4,7 @@ describe("User can create an account", () => {
       fixture: "userRegistrationResponse.json",
     });
     cy.visit("/");
-    cy.get("[data-cy=btn-login]").click();
+    cy.get("[data-cy=btn-signup]").click();
   });
 
   it("is expected to be able to register as an User", () => {
@@ -19,7 +19,7 @@ describe("User can create an account", () => {
     cy.get("[data-cy=email-input]").type("user@email.com");
     cy.get("[data-cy=password-input]").type("password");
     cy.get("[data-cy=confirm-password-input]").type("password");
-    cy.get("[data-cy=btn-signup]").click();
+    cy.get("[data-cy=btn-signup]").click({ multiple: true });
     cy.get("[data-cy=registration-message]").should(
       "contain",
       "Registration successful"
