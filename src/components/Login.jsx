@@ -1,15 +1,16 @@
-import axios from "axios"
-import React, { useState } from "react"
-import { Container, Modal, Form, Input, Button } from "semantic-ui-react"
+import axios from "axios";
+import React, { useState } from "react";
+import { Container, Modal, Form, Input, Button } from "semantic-ui-react";
 
 const Login = () => {
-  const [userEmail, setUserEmail] = useState("")
-  const [userPassword, setUserPassword] = useState("")
-  const [userConfirmPassword, setUserConfirmPassword] = useState("")
-  const [open, setOpen] = useState(false)
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userConfirmPassword, setUserConfirmPassword] = useState("");
+  const [open, setOpen] = useState(false);
+  const [validEmail, setValidEmail] = useState(true);
 
   const handleSubmit = (evt) => {
-    evt.preventDefault()
+    evt.preventDefault();
     axios({
       method: "post",
       url: "https://slowfood.heroku.com/api/auth/",
@@ -19,8 +20,14 @@ const Login = () => {
         password_confirmation: userConfirmPassword,
         confirm_success_url: "placeholder",
       },
-    }).then(setOpen(true))
-  }
+    }).then(setOpen(true));
+  };
+
+  const validateEmail = (email) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    setValidEmail(re.test(String(email).toLowerCase()));
+  };
 
   return (
     <Container>
@@ -32,11 +39,18 @@ const Login = () => {
           id="form-input-control-error-email"
           placeholder="example@email.com"
           value={userEmail}
-          onChange={(e) => setUserEmail(e.target.value)}
-          error={{
-            content: "Please enter a valid email address",
-            pointing: "below",
+          onChange={(e) => {
+            setUserEmail(e.target.value);
+            validateEmail(e.target.value);
           }}
+          error={
+            validEmail
+              ? null
+              : {
+                  content: "Please enter a valid email address",
+                  pointing: "below",
+                }
+          }
         />
         <Form.Field
           data-cy="password-input"
@@ -72,7 +86,7 @@ const Login = () => {
         </Modal.Content>
       </Modal>
     </Container>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
