@@ -54,9 +54,9 @@ const Login = () => {
         </label>
         <input data-cy="btn-signup" type="submit" value="Submit" />
       </form>
-      <button>Submit</button>
       <Modal
         basic
+        closeIcon
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
