@@ -57,6 +57,7 @@ const Signup = () => {
           control={Input}
           label="Password"
           value={userPassword}
+          type="password"
           onChange={(e) => setUserPassword(e.target.value)}
         />
         <Form.Field
@@ -64,6 +65,7 @@ const Signup = () => {
           control={Input}
           label="Confirm Password"
           value={userConfirmPassword}
+          type="password"
           onChange={(e) => setUserConfirmPassword(e.target.value)}
         />
         <Form.Field
