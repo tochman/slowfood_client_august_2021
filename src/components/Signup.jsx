@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Container, Modal, Form, Input, Button } from "semantic-ui-react";
+import { validateEmail } from "./validateEmail";
 
 const Signup = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -25,13 +26,7 @@ const Signup = () => {
       }
     });
   };
-
-  const validateEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    setValidEmail(re.test(String(email).toLowerCase()));
-  };
-
+  
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -44,7 +39,7 @@ const Signup = () => {
           value={userEmail}
           onChange={(e) => {
             setUserEmail(e.target.value);
-            validateEmail(e.target.value);
+            setValidEmail(validateEmail(e.target.value));
           }}
           error={
             validEmail

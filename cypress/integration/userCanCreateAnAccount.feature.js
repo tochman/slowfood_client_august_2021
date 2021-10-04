@@ -35,7 +35,7 @@ describe("User can create an account", () => {
   });
 
   describe("Email validation", () => {
-    it("is expected not to display error with valid email address", () => {
+    it.only("is expected not to display error with valid email address", () => {
       cy.get("[data-cy=email-input]").type("user@email.com");
       cy.get("#form-input-control-error-email-error-message").should(
         "not.exist"
