@@ -7,11 +7,11 @@ describe("User can create an account", () => {
     cy.get("[data-cy=btn-signup]").click();
   });
 
-  it("is expected to be able to register as an User", () => {
+  it("is expected to see a signup button", () => {
     cy.get("[data-cy=btn-signup]").should("be.visible");
   });
 
-  it("is expected to have three input fields", () => {
+  it("is expected to have three input fields and a submit button", () => {
     cy.get("form").children().should("have.length", 4);
   });
 
@@ -24,6 +24,14 @@ describe("User can create an account", () => {
       "contain",
       "Registration successful"
     );
+
+  it('is expected that the response inlcudes a success status', () => {
+    cy.get("[data-cy=email-input]").type("user@email.com");
+    cy.get("[data-cy=password-input]").type("password");
+    cy.get("[data-cy=confirm-password-input]").type("password");
+    cy.get("[data-cy=btn-signup]").click({ multiple: true });
+    
+  });
   });
 
   describe("Email validation", () => {

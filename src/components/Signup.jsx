@@ -18,9 +18,12 @@ const Signup = () => {
         email: userEmail,
         password: userPassword,
         password_confirmation: userConfirmPassword,
-        confirm_success_url: "placeholder",
       },
-    }).then(setOpen(true));
+    }).then((response) => {
+      if (response.data.status === "success") {
+        setOpen(true);
+      }
+    });
   };
 
   const validateEmail = (email) => {
