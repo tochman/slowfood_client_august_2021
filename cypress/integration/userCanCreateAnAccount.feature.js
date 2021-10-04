@@ -25,26 +25,25 @@ describe("User can create an account", () => {
       "Registration successful"
     );
 
-  it('is expected that the response inlcudes a success status', () => {
-    cy.get("[data-cy=email-input]").type("user@email.com");
-    cy.get("[data-cy=password-input]").type("password");
-    cy.get("[data-cy=confirm-password-input]").type("password");
-    cy.get("[data-cy=btn-signup]").click({ multiple: true });
-    
-  });
+    it("is expected that the response inlcudes a success status", () => {
+      cy.get("[data-cy=email-input]").type("user@email.com");
+      cy.get("[data-cy=password-input]").type("password");
+      cy.get("[data-cy=confirm-password-input]").type("password");
+      cy.get("[data-cy=btn-signup]").click({ multiple: true });
+    });
   });
 
   describe("Email validation", () => {
-    it.only("is expected not to display error with valid email address", () => {
+    it("is expected not to display error with valid email address", () => {
       cy.get("[data-cy=email-input]").type("user@email.com");
-      cy.get("#form-input-control-error-email-error-message").should(
-        "not.exist"
-      );
+      cy.get("[data-cy=email-input]").prev().should("contain", "Email");
     });
 
     it("is expected to display error with invalid email address", () => {
       cy.get("[data-cy=email-input]").type("useremail.com");
-      cy.get("#form-input-control-error-email-error-message").should("exist");
+      cy.get("[data-cy=email-input]")
+        .prev()
+        .should("contain", "Please enter a valid email address");
     });
   });
 });

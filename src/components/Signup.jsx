@@ -26,7 +26,7 @@ const Signup = () => {
       }
     });
   };
-  
+
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
