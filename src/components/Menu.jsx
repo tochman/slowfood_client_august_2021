@@ -6,7 +6,7 @@ import axios from "axios";
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [activeCategory, setActiveCategory] = useState("starters");
-  const [flashMessage, setFlashMessage] = useState()
+  const [flashMessage, setFlashMessage] = useState();
 
   useEffect(() => {
     axios.get("https://slowfood.heroku.com/api/products").then((response) => {
@@ -15,21 +15,33 @@ const MenuPage = () => {
   }, []);
 
   const addToCart = async (itemId) => {
-    const response = await axios.post("https://slowfood.heroku.com/api/carts", {
-      params: { product_id: itemId}
-    })
-    const responseMessage = response.data.message
-    const product = menuItems.find(item => item.id === itemId)
-    const flashMessage = responseMessage.replace("This product ", product.name + " ")
-    setFlashMessage(flashMessage)
-  }
+    let flashMessage
+    try {
+      const response = await axios.post(
+        "https://slowfood.heroku.com/api/carts",
+        {
+          params: { product_id: itemId },
+        }
+      );
+      const responseMessage = response.data.message;
+      const product = menuItems.find((item) => item.id === itemId);
+      flashMessage = responseMessage.replace(
+        "This product ",
+        product.name + " "
+      );
+    } catch (error) {
+      flashMessage = error.response.data.message
+    } finally {
+      setFlashMessage(flashMessage);
+    }
+  };
 
   const itemsInCategories = menuItems.filter(
     (item) => item.category === activeCategory
   );
 
   let menuList = itemsInCategories.map((item) => {
-    return <MenuItem key={item.id} item={item} addToCart={addToCart} />
+    return <MenuItem key={item.id} item={item} addToCart={addToCart} />;
   });
 
   return (
