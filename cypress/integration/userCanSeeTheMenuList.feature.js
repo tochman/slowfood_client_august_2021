@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 describe("User can see menu", () => {
   beforeEach(() => {
     cy.intercept("**api/products", {
