@@ -1,7 +1,7 @@
 import React from "react";
 import { List, Image } from "semantic-ui-react";
 
-const MenuItem = ({ item }) => {
+const MenuItem = ({ item, addToCart }) => {
   return (
     <List.Item data-cy={`item-${item.id}`}>
       <Image data-cy="image" src={item.image} size="mini" floated="right" />
@@ -13,6 +13,7 @@ const MenuItem = ({ item }) => {
         <List.Item data-cy="price">{item.price} kr</List.Item>
       </List.Content>
       <List.Icon
+        onClick={() => addToCart(item.id)}
         floated="right"
         name="cart"
         link
