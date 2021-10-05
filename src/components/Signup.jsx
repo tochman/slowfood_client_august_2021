@@ -38,8 +38,9 @@ const Signup = () => {
           placeholder="example@email.com"
           value={userEmail}
           onChange={(e) => {
-            setUserEmail(e.target.value);
-            setValidEmail(validateEmail(e.target.value));
+            let inputValue = e.target.value.toLowerCase();
+            setUserEmail(inputValue);
+            setValidEmail(validateEmail(inputValue));
           }}
           error={
             validEmail
