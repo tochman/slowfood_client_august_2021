@@ -7,6 +7,7 @@ const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [activeCategory, setActiveCategory] = useState("starters");
   const [flashMessage, setFlashMessage] = useState();
+  const [cartId, setCartId] = useState();
 
   useEffect(() => {
     axios.get("https://slowfood.heroku.com/api/products").then((response) => {
@@ -15,22 +16,23 @@ const MenuPage = () => {
   }, []);
 
   const addToCart = async (itemId) => {
-    let flashMessage
+    let flashMessage;
+    const method = cartId ? "PUT" : "POST";
     try {
-      const response = await axios.post(
-        "https://slowfood.heroku.com/api/carts",
-        {
-          params: { product_id: itemId },
-        }
-      );
+      const response = await axios({
+        method: method,
+        url: "https://slowfood.heroku.com/api/carts",
+        data: { product_id: itemId },
+      });
       const responseMessage = response.data.message;
       const product = menuItems.find((item) => item.id === itemId);
       flashMessage = responseMessage.replace(
         "This product ",
         product.name + " "
       );
+      setCartId(response.data.cart.id);
     } catch (error) {
-      flashMessage = error.response.data.message
+      flashMessage = error.response.data.message;
     } finally {
       setFlashMessage(flashMessage);
     }
