@@ -28,4 +28,21 @@ describe("user adds a second product to existing order", () => {
       );
     });
   });
+
+  describe.only("when the server responds with RecordNotFound", () => {
+    it("is expected to display an error message", () => {
+      cy.intercept("PUT", "**api/carts", {
+        statusCode: 422,
+        fixture: "errorMessageProductNotFound.json",
+      }).as("secondProductRequest");
+      cy.get("[data-cy=add-to-basket-1").click();
+      cy.wait("@secondProductRequest")
+        .its("response.statusCode")
+        .should("eq", 422);
+      cy.get("[data-cy=flash-message]").should(
+        "contain.text",
+        "Product not found!"
+      );
+    });
+  });
 });
