@@ -29,7 +29,7 @@ describe("user adds a second product to existing order", () => {
     });
   });
 
-  describe.only("when the server responds with RecordNotFound", () => {
+  describe("when the server responds with RecordNotFound", () => {
     it("is expected to display an error message", () => {
       cy.intercept("PUT", "**api/carts", {
         statusCode: 422,
