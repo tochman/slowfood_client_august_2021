@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 describe("user adds a second product to existing order", () => {
   beforeEach(() => {
     cy.intercept("GET", "**api/products", {
