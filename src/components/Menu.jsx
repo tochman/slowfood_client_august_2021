@@ -7,7 +7,8 @@ const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [activeCategory, setActiveCategory] = useState("starters");
   const [flashMessage, setFlashMessage] = useState();
-  const [cartId, setCartId] = useState();
+  const [cart, setCart] = useState();
+  const [viewCart, setViewCart] = useState();
 
   useEffect(() => {
     axios.get("https://slowfood.heroku.com/api/products").then((response) => {
@@ -17,7 +18,7 @@ const MenuPage = () => {
 
   const addToCart = async (itemId) => {
     let flashMessage;
-    const method = cartId ? "PUT" : "POST";
+    const method = cart ? "PUT" : "POST";
     try {
       const response = await axios({
         method: method,
@@ -26,11 +27,8 @@ const MenuPage = () => {
       });
       const responseMessage = response.data.message;
       const product = menuItems.find((item) => item.id === itemId);
-      flashMessage = responseMessage.replace(
-        "This product ",
-        product.name + " "
-      );
-      setCartId(response.data.cart.id);
+      flashMessage = responseMessage.replace(`This product ${product.name}`);
+      setCart(response.data.cart);
     } catch (error) {
       flashMessage = error.response.data.message;
     } finally {
@@ -45,6 +43,21 @@ const MenuPage = () => {
   let menuList = itemsInCategories.map((item) => {
     return <MenuItem key={item.id} item={item} addToCart={addToCart} />;
   });
+
+  let cartProducts, cartTotal;
+  if (cart) {
+    cartProducts = cart.products.map((product) => {
+      return (
+        <div key={product.id}>
+          <h2>{product.name}</h2>
+        </div>
+      );
+    });
+    let total = 0;
+    cartTotal = cart.products.map((product) => {
+      return (total += parseInt(product.price));
+    });
+  }
 
   return (
     <Container>
@@ -81,11 +94,30 @@ const MenuPage = () => {
               active={activeCategory === "drinks"}
               onClick={() => setActiveCategory("drinks")}
             />
+            {cart && (
+              <Menu.Item
+                name={viewCart ? "Close Cart" : "View cart"}
+                data-cy="view-cart"
+                onClick={() => setViewCart(!viewCart)}
+              />
+            )}
           </Menu>
         </Grid.Column>
         <Grid.Column width={12}>
-          <h1>{activeCategory}</h1>
-          <Segment data-cy="menu-section">{menuList}</Segment>
+          {viewCart ? (
+            <div data-cy="cart-details">
+              <div data-cy="cart-status">
+                Status: {cart.finalized ? "closed" : "open"}
+              </div>
+              <div data-cy="cart-products">{cartProducts}</div>
+              <div data-cy="cart-total"> {`To pay: ${cartTotal}kr`}</div>
+            </div>
+          ) : (
+            <>
+              <h1>{activeCategory}</h1>
+              <Segment data-cy="menu-section">{menuList}</Segment>
+            </>
+          )}
         </Grid.Column>
       </Grid>
       {flashMessage && <h3 data-cy="flash-message">{flashMessage}</h3>}
