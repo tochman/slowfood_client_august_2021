@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Segment, Grid, Menu, Container } from "semantic-ui-react";
 import MenuItem from "./MenuItem";
 import axios from "axios";
+import CartView from '../components/CartView';
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -44,20 +45,20 @@ const MenuPage = () => {
     return <MenuItem key={item.id} item={item} addToCart={addToCart} />;
   });
 
-  let cartProducts, cartTotal;
-  if (cart) {
-    cartProducts = cart.products.map((product) => {
-      return (
-        <div key={product.id}>
-          <h2>{product.name}</h2>
-        </div>
-      );
-    });
-    let total = 0;
-    cartTotal = cart.products.map((product) => {
-      return (total += parseInt(product.price));
-    });
-  }
+  // let cartProducts, cartTotal;
+  // if (cart) {
+  //   cartProducts = cart.products.map((product) => {
+  //     return (
+  //       <div key={product.id}>
+  //         <h2>{product.name}</h2>
+  //       </div>
+  //     );
+  //   });
+  //   let total = 0;
+  //   cartTotal = cart.products.map((product) => {
+  //     return (total += parseInt(product.price));
+  //   });
+  // }
 
   return (
     <Container>
@@ -110,7 +111,7 @@ const MenuPage = () => {
                 Status: {cart.finalized ? "closed" : "open"}
               </div>
               <div data-cy="cart-products">{cartProducts}</div>
-              <div data-cy="cart-total"> {`To pay: ${cartTotal}kr`}</div>
+              <div data-cy="cart-total"> {`To pay: ${CartView}kr`}</div>
             </div>
           ) : (
             <>
@@ -118,6 +119,7 @@ const MenuPage = () => {
               <Segment data-cy="menu-section">{menuList}</Segment>
             </>
           )}
+          <CartView cart={cart} cartProducts={cartProducts} cartTotal={cartTotal} />
         </Grid.Column>
       </Grid>
       {flashMessage && <h3 data-cy="flash-message">{flashMessage}</h3>}
