@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Segment, Grid, Menu, Container } from "semantic-ui-react";
 import MenuItem from "./MenuItem";
+import CartView from "../components/CartView";
 import axios from "axios";
-import CartView from '../components/CartView';
+import _ from "lodash"
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -27,7 +28,7 @@ const MenuPage = () => {
         data: { product_id: itemId },
       });
       const responseMessage = response.data.message;
-      const product = menuItems.find((item) => item.id === itemId);
+      const product = response.data.cart.products.id === itemId;
       flashMessage = responseMessage.replace(`This product ${product.name}`);
       setCart(response.data.cart);
     } catch (error) {
@@ -45,20 +46,11 @@ const MenuPage = () => {
     return <MenuItem key={item.id} item={item} addToCart={addToCart} />;
   });
 
-  // let cartProducts, cartTotal;
-  // if (cart) {
-  //   cartProducts = cart.products.map((product) => {
-  //     return (
-  //       <div key={product.id}>
-  //         <h2>{product.name}</h2>
-  //       </div>
-  //     );
-  //   });
-  //   let total = 0;
-  //   cartTotal = cart.products.map((product) => {
-  //     return (total += parseInt(product.price));
-  //   });
-  // }
+  let cartView = ((cart) => {
+    return <CartView cart={cart} />
+  })
+
+  const neatCategoires = _.split(_.upperFirst(activeCategory),['_'])
 
   return (
     <Container>
@@ -105,21 +97,13 @@ const MenuPage = () => {
           </Menu>
         </Grid.Column>
         <Grid.Column width={12}>
-          {viewCart ? (
-            <div data-cy="cart-details">
-              <div data-cy="cart-status">
-                Status: {cart.finalized ? "closed" : "open"}
-              </div>
-              <div data-cy="cart-products">{cartProducts}</div>
-              <div data-cy="cart-total"> {`To pay: ${CartView}kr`}</div>
-            </div>
-          ) : (
-            <>
-              <h1>{activeCategory}</h1>
-              <Segment data-cy="menu-section">{menuList}</Segment>
-            </>
+        {viewCart ? (
+        <Segment data-cy="cart-details">{cartView}</Segment>) : (
+          <>
+            <h1>{neatCategoires}</h1>
+            <Segment data-cy="menu-section">{menuList}</Segment>
+          </>
           )}
-          <CartView cart={cart} cartProducts={cartProducts} cartTotal={cartTotal} />
         </Grid.Column>
       </Grid>
       {flashMessage && <h3 data-cy="flash-message">{flashMessage}</h3>}
