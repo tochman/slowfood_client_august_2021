@@ -1,8 +1,8 @@
 import React from "react";
-// import { Grid, Segment,  } from "semantic-ui-react";
 
-const CartView = (cart) => {
+const CartView = ({ cart }) => {
   let cartProducts, cartTotal;
+
   if (cart) {
     cartProducts = cart.products.map((product) => {
       return (

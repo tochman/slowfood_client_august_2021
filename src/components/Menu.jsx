@@ -3,7 +3,7 @@ import { Segment, Grid, Menu, Container } from "semantic-ui-react";
 import MenuItem from "./MenuItem";
 import CartView from "../components/CartView";
 import axios from "axios";
-import _ from "lodash"
+import _ from "lodash";
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -46,11 +46,7 @@ const MenuPage = () => {
     return <MenuItem key={item.id} item={item} addToCart={addToCart} />;
   });
 
-  let cartView = ((cart) => {
-    return <CartView cart={cart} />
-  })
-
-  const neatCategoires = _.split(_.upperFirst(activeCategory),['_'])
+  const neatCategories = _.startCase(activeCategory);
 
   return (
     <Container>
@@ -97,12 +93,13 @@ const MenuPage = () => {
           </Menu>
         </Grid.Column>
         <Grid.Column width={12}>
-        {viewCart ? (
-        <Segment data-cy="cart-details">{cartView}</Segment>) : (
-          <>
-            <h1>{neatCategoires}</h1>
-            <Segment data-cy="menu-section">{menuList}</Segment>
-          </>
+          {viewCart ? (
+            <CartView cart={cart} />
+          ) : (
+            <>
+              <h1>{neatCategories}</h1>
+              <Segment data-cy="menu-section">{menuList}</Segment>
+            </>
           )}
         </Grid.Column>
       </Grid>
