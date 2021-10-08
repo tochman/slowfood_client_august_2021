@@ -13,6 +13,7 @@ const CartView = ({ cart }) => {
     });
     let total = 0;
     cartTotal = cart.products.map((product) => {
+      debugger
       return (total += parseInt(product.price));
     });
   }
