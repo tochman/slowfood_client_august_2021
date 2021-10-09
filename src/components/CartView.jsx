@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from 'react';
 
 const CartView = ({ cart }) => {
+  const [total, setTotal] = useState(0);
   let cartProducts, cartTotal;
 
   if (cart) {
@@ -11,9 +12,9 @@ const CartView = ({ cart }) => {
         </div>
       );
     });
-    let total = 0;
     cartTotal = cart.products.map((product) => {
-      return (total += parseInt(product.price));
+      // debugger
+      setTotal((total + parseInt(product.price)));
     });
   }
 
@@ -21,7 +22,7 @@ const CartView = ({ cart }) => {
     <>
       <div data-cy="cart-details">
         <div data-cy="cart-status">
-          Status: {cart.finalized ? "closed" : "open"}
+          Status: {cart.finalized ? 'closed' : 'open'}
         </div>
         <div data-cy="cart-products">{cartProducts}</div>
         <div data-cy="cart-total"> {`To pay: ${cartTotal}kr`}</div>

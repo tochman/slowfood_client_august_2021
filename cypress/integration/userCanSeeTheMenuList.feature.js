@@ -6,7 +6,7 @@ describe("User can see menu", () => {
     cy.visit("/");
     cy.get("[data-cy=menu]").click();
   });
-
+ 
   describe("User can see menu-items by category", () => {
     it("is expected to display the content of starter-menu", () => {
       cy.get("[data-cy=starter-tab]").click();
