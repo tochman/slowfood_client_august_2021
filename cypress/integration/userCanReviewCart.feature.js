@@ -26,6 +26,12 @@ describe('user can review their cart with one product', () => {
         cy.get('[data-cy=cart-total]').should('contain.text', 'To pay: 40kr');
       });
     });
+    it('is expected to display a message show the product was added to the cart', () => {
+      cy.get('[data-cy=flash-message]').should(
+        'contain.text',
+        'Insects was added to your cart!'
+      );
+    });
   });
 
   describe('user can review their cart with multiple products', () => {
@@ -34,7 +40,6 @@ describe('user can review their cart with one product', () => {
         statusCode: 200,
         fixture: 'successfulAddSecondProductToOrderResponse.json',
       }).as('secondProductRequest');
-      cy.get('[data-cy=view-cart]').click();
       cy.get('[data-cy=desserts-tab]').click();
       cy.get('[data-cy=add-to-basket-5]').click();
       cy.get('[data-cy=view-cart]').click();
@@ -48,8 +53,17 @@ describe('user can review their cart with one product', () => {
           'contain.text',
           'Insects' && 'Fecies Lava Mountain'
         );
-        cy.get('[data-cy=cart-total]').should('contain.text', 'To pay: 80kr');
+        cy.get('[data-cy=cart-total]').should(
+          'contain.text',
+          'To pay: 80kr'
+        );
       });
+    });
+    it('is expected to display a message show the product was added to the cart', () => {
+      cy.get('[data-cy=flash-message]').should(
+        'contain.text',
+        'Fecies Lava Mountain was added to your cart!'
+      );
     });
   });
 });

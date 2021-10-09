@@ -1,22 +1,20 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const CartView = ({ cart }) => {
-  const [total, setTotal] = useState(0);
-  let cartProducts, cartTotal;
+  let total;
+  let cartTotal = 0;
 
-  if (cart) {
-    cartProducts = cart.products.map((product) => {
-      return (
-        <div key={product.id}>
-          <h2>{product.name}</h2>
-        </div>
-      );
-    });
-    cartTotal = cart.products.map((product) => {
-      // debugger
-      setTotal((total + parseInt(product.price)));
-    });
-  }
+  const cartProducts = cart?.products.map((product) => {
+    return (
+      <div key={product.id}>
+        <h2>{product.name}</h2>
+      </div>
+    );
+  });
+
+  total = cart.products.map((product) => {
+    return (cartTotal += parseInt(product.price));
+  });
 
   return (
     <>
