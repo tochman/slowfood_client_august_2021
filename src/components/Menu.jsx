@@ -11,17 +11,12 @@ const MenuPage = () => {
   const [flashMessage, setFlashMessage] = useState();
   const [cart, setCart] = useState();
   const [viewCart, setViewCart] = useState();
-  // const [finalizeOrder, setFinalizeOrder] = useState()
 
   useEffect(() => {
     axios.get("https://slowfood.heroku.com/api/products").then((response) => {
       setMenuItems(response.data.products);
     });
   }, []);
-
-  // const closeOrder = async (finalizeOrder) => {
-  //   let finalize
-  // }
 
   const addToCart = async (itemId) => {
     let flashMessage;
@@ -101,7 +96,6 @@ const MenuPage = () => {
           {viewCart ? (
             <>
               <CartView cart={cart} />
-              
             </>
           ) : (
             <>

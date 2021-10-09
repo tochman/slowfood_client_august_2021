@@ -1,4 +1,4 @@
-describe("user can finalise their order", () => {
+describe("user can finalize their order", () => {
   before(() => {
     cy.intercept("GET", "**api/products", {
       fixture: "menuItems.json",
@@ -17,11 +17,12 @@ describe("user can finalise their order", () => {
     beforeEach(() => {
       cy.intercept("PUT", "**api/carts?=125&finalized=true", {
         statusCode: 200,
-        fixture: "finaliseOrder.json",
+        fixture: "finalizeOrder.json",
       }).as("finalizeOrderRequest");
     });
 
     it("is expected to display a success message once finalize order btn is clicked ", () => {
+      cy.get("[data-cy=cart-status]").should("contain.text", "Status: open");
       cy.get("[data-cy=finalize-order]").should("be.visible");
       cy.get("[data-cy=finalize-order]").click();
       cy.wait("@finalizeOrderRequest")
@@ -30,7 +31,7 @@ describe("user can finalise their order", () => {
     });
 
     it("is expected to receive a response message with the pickup time from the api", () => {
-      cy.get("[data-cy=finalise-response-message]").should(
+      cy.get("[data-cy=finalize-response-message]").should(
         "contain.text",
         "Your order is ready for pickup at 21:00"
       );
