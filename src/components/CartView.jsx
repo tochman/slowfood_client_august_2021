@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const CartView = ({ cart }) => {
-  let total;
   let cartTotal = 0;
 
   const cartProducts = cart?.products.map((product) => {
@@ -12,7 +11,7 @@ const CartView = ({ cart }) => {
     );
   });
 
-  total = cart.products.map((product) => {
+  cart.products.map((product) => {
     return (cartTotal += parseInt(product.price));
   });
 

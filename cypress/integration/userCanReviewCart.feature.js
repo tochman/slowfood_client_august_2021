@@ -53,10 +53,7 @@ describe('user can review their cart with one product', () => {
           'contain.text',
           'Insects' && 'Fecies Lava Mountain'
         );
-        cy.get('[data-cy=cart-total]').should(
-          'contain.text',
-          'To pay: 80kr'
-        );
+        cy.get('[data-cy=cart-total]').should('contain.text', 'To pay: 80kr');
       });
     });
     it('is expected to display a message show the product was added to the cart', () => {
