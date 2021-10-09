@@ -8,13 +8,14 @@ const CartView = ({ cart }) => {
 
   const closeOrder = async () => {
     debugger;
-    const response = await axios.put({
-      url: `https://slowfood.heroku.com/api/carts?${cart.id}`,
+    const response = await axios.put(`https://slowfood.heroku.com/api/carts?=125&finalized=true`)
+    // const response = await axios.put({
+    //   url: `https://slowfood.heroku.com/api/carts?${cart.id}`,
 
-      params: {
-        finalized: true,
-      },
-    });
+    //   params: {
+    //     finalized: true,
+    //   },
+    // });
 
     setFinalizeOrder(response.data.cart.finalized);
   };

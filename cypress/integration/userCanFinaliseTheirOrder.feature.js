@@ -15,9 +15,8 @@ describe("user can finalise their order", () => {
 
   describe("when clicking on the finalize order button", () => {
     beforeEach(() => {
-      cy.intercept("PUT", "**api/carts", {
+      cy.intercept("PUT", "**api/carts?=125&finalized=true", {
         statusCode: 200,
-        finalized: true,
         fixture: "finaliseOrder.json",
       }).as("finalizeOrderRequest");
     });
