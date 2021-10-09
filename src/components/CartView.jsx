@@ -4,20 +4,18 @@ import axios from "axios";
 
 const CartView = ({ cart }) => {
   const [finalizeOrder, setFinalizeOrder] = useState("open");
+  const [responseMessage, setResponseMessage] = useState("")
+
   let cartTotal = 0;
 
   const closeOrder = async () => {
-    debugger;
-    const response = await axios.put(`https://slowfood.heroku.com/api/carts?=125&finalized=true`)
-    // const response = await axios.put({
-    //   url: `https://slowfood.heroku.com/api/carts?${cart.id}`,
-
-    //   params: {
-    //     finalized: true,
-    //   },
-    // });
-
-    setFinalizeOrder(response.data.cart.finalized);
+    const response = await axios
+    .put(`https://slowfood.heroku.com/api/carts?=125&finalized=true`)
+    .then((response) => {
+      setFinalizeOrder(response.data.cart.finalized);
+      debugger;
+        setResponseMessage(response.data.message);
+      });
   };
 
   const cartProducts = cart?.products.map((product) => {
@@ -44,6 +42,7 @@ const CartView = ({ cart }) => {
       <Button data-cy="finalize-order" onClick={() => closeOrder()}>
         Finalize Order
       </Button>
+      <h3 data-cy="finalise-response-message">{`${responseMessage}`}</h3>
     </>
   );
 };

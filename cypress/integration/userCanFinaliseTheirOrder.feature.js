@@ -1,5 +1,5 @@
 describe("user can finalise their order", () => {
-  beforeEach(() => {
+  before(() => {
     cy.intercept("GET", "**api/products", {
       fixture: "menuItems.json",
     });
