@@ -34,7 +34,7 @@ describe('user can review their cart with one product', () => {
         statusCode: 200,
         fixture: 'successfulAddSecondProductToOrderResponse.json',
       }).as('secondProductRequest');
-      // cy.get('[data-cy=view-cart]').click();
+      cy.get('[data-cy=view-cart]').click();
       cy.get('[data-cy=desserts-tab]').click();
       cy.get('[data-cy=add-to-basket-5]').click();
       cy.get('[data-cy=view-cart]').click();
