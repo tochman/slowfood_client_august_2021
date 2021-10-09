@@ -23,9 +23,6 @@ describe("User can browser through the app", () => {
   it("is expected to display a About button", () => {
     cy.get("[data-cy=about]").should("be.visible");
   });
-  it("is expected to display a cart icon", () => {
-    cy.get("[data-cy=shopping-cart]").should("be.visible");
-  });
   it("is expected to display a signup button", () => {
     cy.get("[data-cy=btn-signup]").should("be.visible");
   });

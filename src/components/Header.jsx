@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Icon, Menu } from "semantic-ui-react";
+import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -40,7 +40,7 @@ const Header = () => {
       >
         About
       </Menu.Item>
-      <Menu.Item 
+      <Menu.Item
         position="right"
         id="signup"
         name="signup"
@@ -48,19 +48,9 @@ const Header = () => {
         to={{ pathname: "/signup" }}
         data-cy="btn-signup"
         active={activeItem === "signup"}
-        onClick={setActiveItem}>
-        Sign up
-      </Menu.Item>
-      <Menu.Item
-        id="cart"
-        name="cart"
-        as={Link}
-        to={{ pathname: "/Cart" }}
-        data-cy="cart"
-        active={activeItem === "cart"}
         onClick={setActiveItem}
       >
-        <Icon data-cy="shopping-cart" name="shopping cart" size="big" />
+        Sign up
       </Menu.Item>
     </Menu>
   );
