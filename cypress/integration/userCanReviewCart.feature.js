@@ -42,7 +42,7 @@ describe("user can review their cart", () => {
       cy.get("[data-cy=cart-details]").within(() => {
         cy.get("[data-cy=cart-products]").children().should("have.length", 2);
         cy.get("[data-cy=cart-status]").should("contain.text", "Status: open");
-        cy.get("[data-cy=cart-total]").should("contain.text", "To pay: 40,80kr");
+        cy.get("[data-cy=cart-total]").should("contain.text", "To pay: 80kr");
       });
     });
   });
