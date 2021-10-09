@@ -10,21 +10,30 @@ describe("user can finalise their order", () => {
     cy.visit("/");
     cy.get("[data-cy=menu]").click();
     cy.get("[data-cy=add-to-basket-1]").click();
+    cy.get("[data-cy=view-cart]").click();
   });
 
-  describe("by clicking on the finalise order button", () => {
+  describe("when clicking on the finalize order button", () => {
     beforeEach(() => {
-      cy.get("[data-cy=view-cart]").click();
+      cy.intercept("PUT", "**api/carts", {
+        statusCode: 200,
+        finalized: true,
+        fixture: "finaliseOrder.json",
+      }).as("finalizeOrderRequest");
     });
 
-    it("is expected that the finalise order button is visible", () => {
-      cy.get("[data-cy=finalise-order]").should("be.visible");
+    it("is expected to display a success message once finalize order btn is clicked ", () => {
+      cy.get("[data-cy=finalize-order]").should("be.visible");
+      cy.get("[data-cy=finalize-order]").click();
+      cy.wait("@finalizeOrderRequest")
+        .its("response.statusCode")
+        .should("eq", 200);
     });
 
-    it("is expected to receive a response message from the api", () => {
+    it("is expected to receive a response message with the pickup time from the api", () => {
       cy.get("[data-cy=finalise-response-message]").should(
-        "contain",
-        "You're order has been finalised"
+        "contain.text",
+        "Your order is ready for pickup at 21:00"
       );
       cy.get("[data-cy=cart-status]").should("contain.text", "Status: closed");
     });
