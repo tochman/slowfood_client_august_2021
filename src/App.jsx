@@ -9,6 +9,7 @@ import Signup from "./components/Signup";
 
 const App = () => {
   return (
+    <body>
     <BrowserRouter>
       <Header />
       <Switch>
@@ -19,6 +20,7 @@ const App = () => {
       </Switch>
       <Footer />
     </BrowserRouter>
+  </body>
   );
 };
 
