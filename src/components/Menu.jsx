@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Segment, Grid, Menu, Container } from 'semantic-ui-react';
-import MenuItem from './MenuItem';
-import CartView from '../components/CartView';
-import axios from 'axios';
-import _ from 'lodash';
+import React, { useState, useEffect } from "react";
+import { Segment, Grid, Menu, Container } from "semantic-ui-react";
+import MenuItem from "./MenuItem";
+import CartView from "../components/CartView";
+import axios from "axios";
+import _ from "lodash";
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('starters');
+  const [activeCategory, setActiveCategory] = useState("starters");
   const [flashMessage, setFlashMessage] = useState();
   const [cart, setCart] = useState();
   const [viewCart, setViewCart] = useState();
 
   useEffect(() => {
-    axios.get('https://slowfood.heroku.com/api/products').then((response) => {
+    axios.get("https://slowfood.heroku.com/api/products").then((response) => {
       setMenuItems(response.data.products);
     });
   }, []);
 
   const addToCart = async (itemId) => {
     let flashMessage;
-    const method = cart ? 'PUT' : 'POST';
+    const method = cart ? "PUT" : "POST";
     try {
       const response = await axios({
         method: method,
-        url: 'https://slowfood.heroku.com/api/carts',
+        url: "https://slowfood.heroku.com/api/carts",
         data: { product_id: itemId },
       });
       const responseMessage = response.data.message;
@@ -56,36 +56,36 @@ const MenuPage = () => {
             <Menu.Item
               name="Starters"
               data-cy="starter-tab"
-              active={activeCategory === 'starters'}
-              onClick={() => setActiveCategory('starters')}
+              active={activeCategory === "starters"}
+              onClick={() => setActiveCategory("starters")}
             />
             <Menu.Item
               name="Main Courses"
               data-cy="main-courses-tab"
-              active={activeCategory === 'main-menu'}
-              onClick={() => setActiveCategory('main_courses')}
+              active={activeCategory === "main-menu"}
+              onClick={() => setActiveCategory("main_courses")}
             />
             <Menu.Item
               name="Desserts"
               data-cy="desserts-tab"
-              active={activeCategory === 'desserts'}
-              onClick={() => setActiveCategory('desserts')}
+              active={activeCategory === "desserts"}
+              onClick={() => setActiveCategory("desserts")}
             />
             <Menu.Item
               name="Sides"
               data-cy="sides-tab"
-              active={activeCategory === 'sides'}
-              onClick={() => setActiveCategory('sides')}
+              active={activeCategory === "sides"}
+              onClick={() => setActiveCategory("sides")}
             />
             <Menu.Item
               name="Drinks"
               data-cy="drinks-tab"
-              active={activeCategory === 'drinks'}
-              onClick={() => setActiveCategory('drinks')}
+              active={activeCategory === "drinks"}
+              onClick={() => setActiveCategory("drinks")}
             />
             {cart && (
               <Menu.Item
-                name={viewCart ? 'Close Cart' : 'View cart'}
+                name={viewCart ? "Close Cart" : "View cart"}
                 data-cy="view-cart"
                 onClick={() => setViewCart(!viewCart)}
               />
@@ -94,7 +94,9 @@ const MenuPage = () => {
         </Grid.Column>
         <Grid.Column width={12}>
           {viewCart ? (
-            <CartView cart={cart} />
+            <>
+              <CartView cart={cart} />
+            </>
           ) : (
             <>
               <h1>{neatCategories}</h1>
